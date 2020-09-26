@@ -19,30 +19,28 @@
 ---
 
 ## Descrição
-```bash
 Desenvolver uma API que contenha os dados dos planetas de Star Wars.
-```
+
 
 ## Requisitos:
-```bash
-A API deve ser REST
+- A API deve ser REST
 
-Para cada planeta, os seguintes dados devem ser obtidos do banco de dados da aplicação, sendo inserido manualmente:
-  #Nome
-  #Clima
-  #Terreno
+- Para cada planeta, os seguintes dados devem ser obtidos do banco de dados da aplicação, sendo inserido manualmente:
+  - Nome
+  - Clima
+  - Terreno
 
-Para cada planeta também devemos ter a quantidade de aparições em filmes, que podem ser obtidas pela API pública do Star Wars: https://swapi.co/
-```
+- Para cada planeta também devemos ter a quantidade de aparições em filmes, que podem ser obtidas pela API pública do Star Wars: https://swapi.co/
+
 
 ## Funcionalidades
-```bash
-Adicionar um planeta (com nome, clima e terreno)
-Listar planetas
-Buscar por nome
-Buscar por ID
-Remover planeta
-```
+
+- Adicionar um planeta (com nome, clima e terreno)
+- Listar planetas
+- Buscar por nome
+- Buscar por ID
+- Remover planeta
+
 
 ## Instalação
 ```bash
@@ -52,48 +50,36 @@ $ cd desafio-b2w
 ```
 
 ## Pré-requisitos
-```bash
 Antes de começar, você precisará ter instalado em sua máquina as seguintes ferramentas:
 java 1.8 e Git.
-```
 
-## Produção(DockerFile)
-
-```bash
-
-```
-
----
-
-## Testes
-
-```bash
-
-```
-
----
 
 ## Endpoints
 
 ★ Retorna uma lista de Planetas
 
 - HTTP Method: **GET**
-- Path: /
+- Path: /planet
 
 ★ Retorna um Planeta pelo Id
 
 - HTTP Method: **GET**
-- Path: /
+- Path: /planet/:planetId
 
 ★ Retorna um Planeta pelo nome
 
 - HTTP Method: **GET**
-- Path: /
+- Path: /planet/:planetName
+
+★ Permite deletar um Planeta
+
+- HTTP Method: **DELETE**
+- Path: /planet/:planetId
 
 ★ Permite inserir um Planeta
 
 - HTTP Method: **POST**
-- path: /
+- path: /planet
 - _Body_ de exemplo:
 
 ```JSON
@@ -101,11 +87,6 @@ java 1.8 e Git.
 
 }
 ```
-
-★ Permite deletar um Planeta
-
-- HTTP Method: **DELETE**
-- Path: /
 
 
 ---
