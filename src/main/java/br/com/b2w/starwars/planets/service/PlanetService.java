@@ -33,7 +33,7 @@ public class PlanetService {
 		return planetResponseDTOList;
 	}
 
-	public PlanetResponseDTO findById(Long planetId) {
+	public PlanetResponseDTO findById(String planetId) {
 		PlanetEntity planetEntity = findPlanetById(planetId);
 		PlanetResponseDTO planetResponseDTO = planetMapper.toResponseDTO(planetEntity);
 
@@ -49,7 +49,7 @@ public class PlanetService {
 		return planetMapper.toResponseDTO(planetEntity);
 	}
 
-	public PlanetResponseDTO update(PlanetRequestDTO planetRequestDTO, long planetId) {
+	public PlanetResponseDTO update(PlanetRequestDTO planetRequestDTO, String planetId) {
 		validatePlanetRequestDTO(planetRequestDTO);
 
 		PlanetEntity planetEntity = findPlanetById(planetId);
@@ -59,16 +59,16 @@ public class PlanetService {
 		return planetMapper.toResponseDTO(planetEntity);
 	}
 
-	public void delete(Long planetId) {
+	public void delete(String planetId) {
 		PlanetEntity planetEntity = findPlanetById(planetId);
 		
 		planetRepository.delete(planetEntity);
 	}
 
-	private PlanetEntity findPlanetById(Long planetId) {
+	private PlanetEntity findPlanetById(String planetId) {
 		validatePlanetId(planetId);
 
-		return planetRepository.findById(planetId);
+		return planetRepository.findOne(planetId);
 	}
 
 	private void validatePlanetRequestDTO(PlanetRequestDTO planetRequestDTO) {
@@ -78,7 +78,7 @@ public class PlanetService {
 		}
 	}
 
-	private void validatePlanetId(Long planetId) {
+	private void validatePlanetId(String planetId) {
 		if (planetId == null) {
 			logger.error("planetId is null");
 			throw new ServiceException("PLANET_ID_IS_NULL", "planetId is null", HttpStatus.PRECONDITION_FAILED.value());

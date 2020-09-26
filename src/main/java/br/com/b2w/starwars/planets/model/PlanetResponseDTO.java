@@ -1,34 +1,43 @@
 package br.com.b2w.starwars.planets.model;
 
+import java.util.List;
+
 public class PlanetResponseDTO {
 	
-	private String nome;
-	private String clima;
-	private String terreno;
+	private String name;
+	private String climate;
+	private String terrain;
+	private List<String> films;
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getClima() {
-		return clima;
+	public String getClimate() {
+		return climate;
 	}
 
-	public void setClima(String clima) {
-		this.clima = clima;
+	public void setClimate(String climate) {
+		this.climate = climate;
 	}
 
-	public String getTerreno() {
-		return terreno;
+	public String getTerrain() {
+		return terrain;
 	}
 
-	public void setTerreno(String terreno) {
-		this.terreno = terreno;
+	public void setTerrain(String terrain) {
+		this.terrain = terrain;
 	}
 
+	public List<String> getFilms() {
+		return films;
+	}
 
+	public void setFilms(List<String> films) {
+		this.films = films;
+	}
 }
