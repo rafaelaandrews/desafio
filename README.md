@@ -95,15 +95,15 @@ java 1.8 e Git.
 
 👉 [Git](https://git-scm.com/)
 
-👉 [Spring Boot]()
+👉 [Spring Boot](https://spring.io/projects/spring-boot)
 
-👉 [Spring Data Mongodb]()
+👉 [Spring Data Mongodb](https://spring.io/projects/spring-data-mongodb)
 
-👉 [Spring MVC]()
+👉 [JUnit](https://junit.org/junit5/)
 
-👉 [JUnit]()
+👉 [Mongodb](https://www.mongodb.com/)
 
-👉 [Mongodb]()
+👉 [MapStruct](https://mapstruct.org/)
 
 ---
 
