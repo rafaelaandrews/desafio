@@ -39,21 +39,18 @@ public class PlanetService {
 
 		return planetResponseDTO;
 	}
+	
+	public PlanetResponseDTO findByName(String planetName) {
+		PlanetEntity planetEntity = planetRepository.findOneByName(planetName);
+		PlanetResponseDTO planetResponseDTO = planetMapper.toResponseDTO(planetEntity);
+
+		return planetResponseDTO;
+	}
 
 	public PlanetResponseDTO create(PlanetRequestDTO planetRequestDTO) {
 		validatePlanetRequestDTO(planetRequestDTO);
 
 		PlanetEntity planetEntity = planetMapper.toEntity(planetRequestDTO);
-		planetEntity = planetRepository.save(planetEntity);
-
-		return planetMapper.toResponseDTO(planetEntity);
-	}
-
-	public PlanetResponseDTO update(PlanetRequestDTO planetRequestDTO, String planetId) {
-		validatePlanetRequestDTO(planetRequestDTO);
-
-		PlanetEntity planetEntity = findPlanetById(planetId);
-		planetMapper.updateFromDTO(planetRequestDTO, planetEntity);
 		planetEntity = planetRepository.save(planetEntity);
 
 		return planetMapper.toResponseDTO(planetEntity);
