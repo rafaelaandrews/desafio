@@ -19,7 +19,7 @@ import br.com.b2w.starwars.planets.model.PlanetRequestDTO;
 import br.com.b2w.starwars.planets.model.PlanetResponseDTO;
 
 @RestController
-@RequestMapping("/planets")
+@RequestMapping("/planet")
 public class PlanetController {
 	
 	@GetMapping
@@ -35,19 +35,18 @@ public class PlanetController {
 		return new ResponseEntity<PlanetResponseDTO>(planetResponseDTO, HttpStatus.OK);
 	}
 	
+	@GetMapping("/planetName")
+	public ResponseEntity<PlanetResponseDTO> getByName(
+			@PathVariable final String planetName) {
+		PlanetResponseDTO planetResponseDTO = new PlanetResponseDTO();
+		return new ResponseEntity<PlanetResponseDTO>(planetResponseDTO, HttpStatus.OK);
+	}
+	
 	@PostMapping
 	public ResponseEntity<PlanetResponseDTO> create(
 			@RequestBody PlanetRequestDTO planetRequestDTO) {
 		PlanetResponseDTO planetResponseDTO = new PlanetResponseDTO();
 		return new ResponseEntity<PlanetResponseDTO>(planetResponseDTO, HttpStatus.CREATED);
-	}
-	
-	@PutMapping("/planetId")
-	public ResponseEntity<PlanetResponseDTO> update(
-			@RequestBody PlanetRequestDTO planetRequestDTO,
-			@PathVariable final Long planetId) {
-		PlanetResponseDTO planetResponseDTO = new PlanetResponseDTO();
-		return new ResponseEntity<PlanetResponseDTO>(planetResponseDTO, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/planetId")
