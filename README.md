@@ -12,7 +12,6 @@
 - [Instalação](#Instalação)
 - [MongoDB](#MongoDB)
 - [Pré-requisitos](#Pré-requisitos)
-- [Produção (DockerFile)](#Produção(DockerFile))
 - [Testes](#testes)
 - [Endpoints](#Endpoints)
 - [Tecnologias](#tecnologias)
@@ -50,13 +49,9 @@ $ git clone https://github.com/rafaelaandrews/desafio-b2w.git
 
 $ cd desafio-b2w
 
-Para executar a aplicação diretamente pelo maven, utilize o comando:
+$ mvn clean install
 
-No linux:
-$ ./mvnw clean spring-boot:run
-
-No windows:
-$ mvnw.cmd clean spring-boot:run
+Para rodar o projeto utilizei a IDE Eclipse com Spring Tools 3.
 ```
 
 ## MongoDB
