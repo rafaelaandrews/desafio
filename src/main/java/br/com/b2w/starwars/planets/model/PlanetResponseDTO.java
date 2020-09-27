@@ -1,13 +1,11 @@
 package br.com.b2w.starwars.planets.model;
 
-import java.util.List;
-
 public class PlanetResponseDTO {
-	
+
 	private String name;
 	private String climate;
 	private String terrain;
-	private List<String> films;
+	private Integer numberOfFilmAppearances;
 
 	public String getName() {
 		return name;
@@ -33,11 +31,12 @@ public class PlanetResponseDTO {
 		this.terrain = terrain;
 	}
 
-	public List<String> getFilms() {
-		return films;
+	public Integer getNumberOfFilmAppearances() {
+		return numberOfFilmAppearances;
 	}
 
-	public void setFilms(List<String> films) {
-		this.films = films;
+	public void setNumberOfFilmAppearances(Integer numberOfFilmAppearances) {
+		this.numberOfFilmAppearances = numberOfFilmAppearances;
 	}
+	
 }

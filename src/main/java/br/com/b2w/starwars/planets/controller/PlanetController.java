@@ -2,6 +2,8 @@ package br.com.b2w.starwars.planets.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,37 +28,38 @@ public class PlanetController {
 	@Autowired
 	PlanetService planetService;
 	
-	@GetMapping
+	@GetMapping("/")
 	public List<PlanetResponseDTO> getAll() {
 		List<PlanetResponseDTO> planetList = planetService.findAll();
 		return planetList;
 	}
 	
-	@GetMapping("/planetId")
+	@GetMapping("/{id}")
 	public ResponseEntity<PlanetResponseDTO> getById(
-			@PathVariable String planetId) {
-		PlanetResponseDTO planetResponseDTO = planetService.findById(planetId);
+			@PathVariable String id) {
+		PlanetResponseDTO planetResponseDTO = planetService.findById(id);
 		return new ResponseEntity<PlanetResponseDTO>(planetResponseDTO, HttpStatus.OK);
 	}
 	
-	@GetMapping("/planetName")
+	@GetMapping
 	public ResponseEntity<PlanetResponseDTO> getByName(
-			@PathVariable String planetName) {
-		PlanetResponseDTO planetResponseDTO = planetService.findByName(planetName);
+			@RequestParam String name) {
+		PlanetResponseDTO planetResponseDTO = planetService.findByName(name);
 		return new ResponseEntity<PlanetResponseDTO>(planetResponseDTO, HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<PlanetResponseDTO> create(
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public void create(
+			@Valid
 			@RequestBody PlanetRequestDTO planetRequestDTO) {
-		PlanetResponseDTO planetResponseDTO = planetService.create(planetRequestDTO);
-		return new ResponseEntity<PlanetResponseDTO>(planetResponseDTO, HttpStatus.CREATED);
+		planetService.create(planetRequestDTO);
 	}
 	
-	@DeleteMapping("/planetId")
+	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.ACCEPTED)
 	public void delete(
-			@PathVariable String planetId) {
-		planetService.delete(planetId);
+			@PathVariable String id) {
+		planetService.delete(id);
 	}
 }

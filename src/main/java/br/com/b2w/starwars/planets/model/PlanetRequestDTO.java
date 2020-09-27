@@ -1,13 +1,10 @@
 package br.com.b2w.starwars.planets.model;
 
-import java.util.List;
-
 public class PlanetRequestDTO {
 	
 	private String name;
 	private String climate;
 	private String terrain;
-	private List<String> films;
 
 	public String getName() {
 		return name;
@@ -31,14 +28,6 @@ public class PlanetRequestDTO {
 
 	public void setTerrain(String terrain) {
 		this.terrain = terrain;
-	}
-
-	public List<String> getFilms() {
-		return films;
-	}
-
-	public void setFilms(List<String> films) {
-		this.films = films;
 	}
 
 }
