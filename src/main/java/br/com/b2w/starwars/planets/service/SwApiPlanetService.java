@@ -26,18 +26,18 @@ public class SwApiPlanetService {
 
 	public Integer getFilmAppearancesByName(String planetName) {
 
-		HttpGet request = buildRequest(planetName);
+		HttpGet httpGetRequest = buildRequest(planetName);
 		HttpClient httpClient = HttpClientBuilder.create().build();
 
-		HttpResponse response = null;
+		HttpResponse httpResponse = null;
 		JsonObject jsonObject = null;
 
 		try {
-			response = httpClient.execute(request);
+			httpResponse = httpClient.execute(httpGetRequest);
 
-			validateResponse(response);
+			validateHttpResponse(httpResponse);
 
-			jsonObject = buildJsonObject(response);
+			jsonObject = buildJsonObject(httpResponse);
 
 		} catch (IOException ex) {
 			new IOException(ex.getMessage());
@@ -54,22 +54,22 @@ public class SwApiPlanetService {
 			return numberOfFilmAppearances;
 		
 		JsonArray results = jsonObject.getAsJsonArray("results");
-		JsonElement element = results.get(0);
-		JsonObject obj = element.getAsJsonObject();
-		JsonArray result = obj.getAsJsonArray("films");
-		numberOfFilmAppearances = result.size();
+		JsonElement jsonElement = results.get(0);
+		JsonObject result = jsonElement.getAsJsonObject();
+		JsonArray films = result.getAsJsonArray("films");
+		numberOfFilmAppearances = films.size();
 		
 		return numberOfFilmAppearances;	
 	}
 
 	private HttpGet buildRequest(String planetName) {
-		HttpGet request = new HttpGet(swapiUrl + planetName);
-		request.addHeader("accept", "application/json");
+		HttpGet httpGet = new HttpGet(swapiUrl + planetName);
+		httpGet.addHeader("accept", "application/json");
 
-		return request;
+		return httpGet;
 	}
 
-	private void validateResponse(HttpResponse response) {
+	private void validateHttpResponse(HttpResponse response) {
 		if (response.getStatusLine().getStatusCode() != 200) {
 			throw new ServiceException("Failed: HTTP error: ", response.getStatusLine().getReasonPhrase(),
 					response.getStatusLine().getStatusCode());
@@ -79,7 +79,7 @@ public class SwApiPlanetService {
 	private JsonObject buildJsonObject(HttpResponse response) {
 		BufferedReader bufferedReader = null;
 		StringBuilder stringBuilder = new StringBuilder();
-		String line;
+		String line = "";
 
 		try {
 			bufferedReader = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
