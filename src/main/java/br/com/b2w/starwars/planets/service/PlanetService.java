@@ -24,6 +24,9 @@ public class PlanetService {
 
 	@Autowired
 	PlanetRepository planetRepository;
+	
+	@Autowired
+	SwApiPlanetService swApiPlanetService;
 
 	PlanetMapper planetMapper = Mappers.getMapper(PlanetMapper.class);
 
@@ -37,14 +40,21 @@ public class PlanetService {
 	public PlanetResponseDTO findById(String planetId) {
 		PlanetEntity planetEntity = findPlanetById(planetId);
 		PlanetResponseDTO planetResponseDTO = planetMapper.toResponseDTO(planetEntity);
-
+		
+		Integer numberOfFilmAppearances = swApiPlanetService.getFilmAppearancesByName(planetResponseDTO.getName());
+		planetResponseDTO.setNumberOfFilmAppearances(numberOfFilmAppearances);
+		
 		return planetResponseDTO;
 	}
 	
 	public PlanetResponseDTO findByName(String planetName) {
+		Integer numberOfFilmAppearances = swApiPlanetService.getFilmAppearancesByName(planetName);
+		
 		PlanetEntity planetEntity = planetRepository.findOneByName(planetName);
 		PlanetResponseDTO planetResponseDTO = planetMapper.toResponseDTO(planetEntity);
 
+		planetResponseDTO.setNumberOfFilmAppearances(numberOfFilmAppearances);
+		
 		return planetResponseDTO;
 	}
 

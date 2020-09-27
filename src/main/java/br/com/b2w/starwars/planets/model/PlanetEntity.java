@@ -19,7 +19,6 @@ public class PlanetEntity implements Serializable {
 
 	private String climate;
 	private String terrain;
-	private Integer numberOfFilmAppearances;
 
 	public String getId() {
 		return id;
@@ -51,14 +50,6 @@ public class PlanetEntity implements Serializable {
 
 	public void setTerrain(String terrain) {
 		this.terrain = terrain;
-	}
-
-	public Integer getNumberOfFilmAppearances() {
-		return numberOfFilmAppearances;
-	}
-
-	public void setNumberOfFilmAppearances(Integer numberOfFilmAppearances) {
-		this.numberOfFilmAppearances = numberOfFilmAppearances;
 	}
 
 }
