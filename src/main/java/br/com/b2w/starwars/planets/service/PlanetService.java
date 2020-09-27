@@ -50,6 +50,7 @@ public class PlanetService {
 
 	public PlanetResponseDTO create(PlanetRequestDTO planetRequestDTO) {
 		validatePlanetRequestDTO(planetRequestDTO);
+		validatePlanetName(planetRequestDTO.getName());
 
 		PlanetEntity planetEntity = planetMapper.toEntity(planetRequestDTO);
 		planetEntity = planetRepository.save(planetEntity);
@@ -67,6 +68,18 @@ public class PlanetService {
 		validatePlanetId(planetId);
 
 		return planetRepository.findOne(planetId);
+	}
+	
+	private void validatePlanetName(String planetName) {
+		if (planetName == null || planetName == "") {
+			logger.error("planetName is null or empty");
+			throw new ServiceException("PLANET_NAME_IS_NULL_OR_EMPTY", "planetName is null or empty", HttpStatus.PRECONDITION_FAILED.value());
+		}
+		
+		if(planetRepository.findOneByName(planetName) != null) {
+			logger.error("planetName already registered");
+			throw new ServiceException("PLANET_NAME_ALREADY_REGISTERED", "planetName already registered", HttpStatus.PRECONDITION_FAILED.value());
+		}
 	}
 
 	private void validatePlanetRequestDTO(PlanetRequestDTO planetRequestDTO) {

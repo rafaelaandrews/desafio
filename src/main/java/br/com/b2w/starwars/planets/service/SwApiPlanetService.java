@@ -20,7 +20,7 @@ public class SwApiPlanetService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public List<SwApiPlanet> getSwApiPlanet(String name) {
+	public List<SwApiPlanet> getSwApiPlanetName(String name) {
 		
 		restTemplate.getForObject(swapiUrlBase, SwApiPlanet.class, name);
 
