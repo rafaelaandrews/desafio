@@ -10,6 +10,8 @@
 - [Requisitos](#Requisitos)
 - [Funcionalidades](#Funcionalidades)
 - [Instalação](#Instalação)
+- [MongoDB](#MongoDB)
+- [Pré-requisitos](#Pré-requisitos)
 - [Produção (DockerFile)](#Produção(DockerFile))
 - [Testes](#testes)
 - [Endpoints](#Endpoints)
@@ -47,6 +49,21 @@ Desenvolver uma API que contenha os dados dos planetas de Star Wars.
 $ git clone https://github.com/rafaelaandrews/desafio-b2w.git
 
 $ cd desafio-b2w
+
+Para executar a aplicação diretamente pelo maven, utilize o comando:
+
+No linux:
+$ ./mvnw clean spring-boot:run
+
+No windows:
+$ mvnw.cmd clean spring-boot:run
+```
+
+## MongoDB
+O projeto está configurado para usar um cluster hospedado em um servidor cloud mongodb.
+Para visualizá-lo no MongoDB Compass, utilize a conexão: 
+```bash
+mongodb+srv://admin:BSAvpDFDnMV8CPH6@cluster0.y6j52.mongodb.net/test
 ```
 
 ## Pré-requisitos
@@ -59,22 +76,22 @@ java 1.8 e Git.
 ★ Retorna uma lista de Planetas
 
 - HTTP Method: **GET**
-- Path: /planet
+- Path: /planet/
 
 ★ Retorna um Planeta pelo Id
 
 - HTTP Method: **GET**
-- Path: /planet/:planetId
+- Path: /planet/:id
 
 ★ Retorna um Planeta pelo nome
 
 - HTTP Method: **GET**
-- Path: /planet/:planetName
+- Path: /planet?name=:name
 
 ★ Permite deletar um Planeta
 
 - HTTP Method: **DELETE**
-- Path: /planet/:planetId
+- Path: /planet/:id
 
 ★ Permite inserir um Planeta
 
@@ -84,7 +101,9 @@ java 1.8 e Git.
 
 ```JSON
 {
-
+  "name": "Tatooine",
+  "climate": "Arid",
+  "terrain": "Dessert"
 }
 ```
 
