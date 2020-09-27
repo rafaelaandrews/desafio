@@ -96,9 +96,9 @@ java 1.8 e Git.
 
 ```JSON
 {
-  "name": "Tatooine",
-  "climate": "Arid",
-  "terrain": "Dessert"
+  "name": "Alderaan",
+  "climate": "temperate",
+  "terrain": "grasslands, mountains"
 }
 ```
 
