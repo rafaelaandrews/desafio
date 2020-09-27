@@ -23,6 +23,7 @@
 .settings/
 .classpath
 .project
+.factorypath
 
 # build
 target/

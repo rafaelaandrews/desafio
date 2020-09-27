@@ -1,9 +1,9 @@
-FROM java:1.8
+FROM node:10
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN mvn clean install
+RUN npm install
 
 COPY . .
 
