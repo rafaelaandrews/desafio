@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import br.com.b2w.starwars.planets.dto.PlanetRequestDTO;
+import br.com.b2w.starwars.planets.dto.PlanetResponseDTO;
 import br.com.b2w.starwars.planets.exception.ServiceException;
 import br.com.b2w.starwars.planets.mapper.PlanetMapper;
 import br.com.b2w.starwars.planets.model.PlanetEntity;
-import br.com.b2w.starwars.planets.model.PlanetRequestDTO;
-import br.com.b2w.starwars.planets.model.PlanetResponseDTO;
 import br.com.b2w.starwars.planets.repository.PlanetRepository;
 
 @Service
@@ -40,20 +40,13 @@ public class PlanetService {
 	public PlanetResponseDTO findById(String planetId) {
 		PlanetEntity planetEntity = findPlanetById(planetId);
 		PlanetResponseDTO planetResponseDTO = planetMapper.toResponseDTO(planetEntity);
-		
-		Integer numberOfFilmAppearances = swApiPlanetService.getFilmAppearancesByName(planetResponseDTO.getName());
-		planetResponseDTO.setNumberOfFilmAppearances(numberOfFilmAppearances);
-		
+				
 		return planetResponseDTO;
 	}
 	
-	public PlanetResponseDTO findByName(String planetName) {
-		Integer numberOfFilmAppearances = swApiPlanetService.getFilmAppearancesByName(planetName);
-		
+	public PlanetResponseDTO findByName(String planetName) {	
 		PlanetEntity planetEntity = planetRepository.findOneByName(planetName);
 		PlanetResponseDTO planetResponseDTO = planetMapper.toResponseDTO(planetEntity);
-
-		planetResponseDTO.setNumberOfFilmAppearances(numberOfFilmAppearances);
 		
 		return planetResponseDTO;
 	}
@@ -63,6 +56,10 @@ public class PlanetService {
 		validatePlanetName(planetRequestDTO.getName());
 
 		PlanetEntity planetEntity = planetMapper.toEntity(planetRequestDTO);
+		
+		Integer numberOfFilmAppearances = swApiPlanetService.getFilmAppearancesByName(planetRequestDTO.getName());
+		planetEntity.setNumberOfFilmAppearances(numberOfFilmAppearances);
+		
 		planetEntity = planetRepository.save(planetEntity);
 
 		return planetMapper.toResponseDTO(planetEntity);

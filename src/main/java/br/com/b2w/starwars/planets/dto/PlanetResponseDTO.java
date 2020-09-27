@@ -1,4 +1,4 @@
-package br.com.b2w.starwars.planets.model;
+package br.com.b2w.starwars.planets.dto;
 
 public class PlanetResponseDTO {
 

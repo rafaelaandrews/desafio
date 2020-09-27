@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 
+import br.com.b2w.starwars.planets.dto.PlanetRequestDTO;
+import br.com.b2w.starwars.planets.dto.PlanetResponseDTO;
 import br.com.b2w.starwars.planets.model.PlanetEntity;
-import br.com.b2w.starwars.planets.model.PlanetRequestDTO;
-import br.com.b2w.starwars.planets.model.PlanetResponseDTO;
 
 @Mapper
 public interface PlanetMapper {

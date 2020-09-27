@@ -46,20 +46,25 @@ public class SwApiPlanetService {
 		return getNumberOfFilmAppearances(jsonObject);
 
 	}
-	
+
 	private Integer getNumberOfFilmAppearances(JsonObject jsonObject) {
 		Integer numberOfFilmAppearances = 0;
-		
-		if(jsonObject == null)
+
+		if (jsonObject == null)
 			return numberOfFilmAppearances;
-		
+
 		JsonArray results = jsonObject.getAsJsonArray("results");
+
+		if (results.size() == 0) {
+			return numberOfFilmAppearances;
+		}
+
 		JsonElement jsonElement = results.get(0);
 		JsonObject result = jsonElement.getAsJsonObject();
 		JsonArray films = result.getAsJsonArray("films");
 		numberOfFilmAppearances = films.size();
-		
-		return numberOfFilmAppearances;	
+
+		return numberOfFilmAppearances;
 	}
 
 	private HttpGet buildRequest(String planetName) {
@@ -79,7 +84,7 @@ public class SwApiPlanetService {
 	private JsonObject buildJsonObject(HttpResponse response) {
 		BufferedReader bufferedReader = null;
 		StringBuilder stringBuilder = new StringBuilder();
-		String line = "";
+		String line = null;
 
 		try {
 			bufferedReader = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
@@ -89,6 +94,7 @@ public class SwApiPlanetService {
 			}
 
 			bufferedReader.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

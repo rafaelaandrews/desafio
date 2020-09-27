@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import br.com.b2w.starwars.planets.dto.PlanetResponse;
 import br.com.b2w.starwars.planets.exception.ServiceException;
-import br.com.b2w.starwars.planets.model.PlanetResponse;
 
 @ControllerAdvice
 public class PlanetExceptionHandler extends ResponseEntityExceptionHandler{
