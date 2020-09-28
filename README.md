@@ -112,8 +112,6 @@ java 1.8 e Git.
 
 👉 [Spring Data Mongodb](https://spring.io/projects/spring-data-mongodb)
 
-👉 [JUnit](https://junit.org/junit5/)
-
 👉 [Mongodb](https://www.mongodb.com/)
 
 👉 [MapStruct](https://mapstruct.org/)
