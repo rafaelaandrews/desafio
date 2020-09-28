@@ -12,7 +12,6 @@
 - [Instalação](#Instalação)
 - [MongoDB](#MongoDB)
 - [Pré-requisitos](#Pré-requisitos)
-- [Testes](#testes)
 - [Endpoints](#Endpoints)
 - [Tecnologias](#tecnologias)
 - [Autor](#Autor)
