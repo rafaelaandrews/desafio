@@ -24,7 +24,7 @@ public class PlanetService {
 
 	@Autowired
 	PlanetRepository planetRepository;
-	
+
 	@Autowired
 	SwApiPlanetService swApiPlanetService;
 
@@ -39,15 +39,19 @@ public class PlanetService {
 
 	public PlanetResponseDTO findById(String planetId) {
 		PlanetEntity planetEntity = findPlanetById(planetId);
+		validatePlanetEntity(planetEntity);
+
 		PlanetResponseDTO planetResponseDTO = planetMapper.toResponseDTO(planetEntity);
-				
+
 		return planetResponseDTO;
 	}
-	
-	public PlanetResponseDTO findByName(String planetName) {	
+
+	public PlanetResponseDTO findByName(String planetName) {
 		PlanetEntity planetEntity = planetRepository.findOneByName(planetName);
+		validatePlanetEntity(planetEntity);
+
 		PlanetResponseDTO planetResponseDTO = planetMapper.toResponseDTO(planetEntity);
-		
+
 		return planetResponseDTO;
 	}
 
@@ -56,10 +60,10 @@ public class PlanetService {
 		validatePlanetName(planetRequestDTO.getName());
 
 		PlanetEntity planetEntity = planetMapper.toEntity(planetRequestDTO);
-		
+
 		Integer numberOfFilmAppearances = swApiPlanetService.getFilmAppearancesByName(planetRequestDTO.getName());
 		planetEntity.setNumberOfFilmAppearances(numberOfFilmAppearances);
-		
+
 		planetEntity = planetRepository.save(planetEntity);
 
 		return planetMapper.toResponseDTO(planetEntity);
@@ -67,8 +71,16 @@ public class PlanetService {
 
 	public void delete(String planetId) {
 		PlanetEntity planetEntity = findPlanetById(planetId);
-		
+		validatePlanetEntity(planetEntity);
+
 		planetRepository.delete(planetEntity);
+	}
+
+	private void validatePlanetEntity(PlanetEntity planetEntity) {
+		if (planetEntity == null) {
+			logger.error("planet not found");
+			throw new ServiceException("PLANET_NOT_FOUND", "planet not found", HttpStatus.NOT_FOUND.value());
+		}
 	}
 
 	private PlanetEntity findPlanetById(String planetId) {
@@ -76,16 +88,18 @@ public class PlanetService {
 
 		return planetRepository.findOne(planetId);
 	}
-	
+
 	private void validatePlanetName(String planetName) {
 		if (planetName == null || planetName == "") {
 			logger.error("planetName is null or empty");
-			throw new ServiceException("PLANET_NAME_IS_NULL_OR_EMPTY", "planetName is null or empty", HttpStatus.PRECONDITION_FAILED.value());
+			throw new ServiceException("PLANET_NAME_IS_NULL_OR_EMPTY", "planetName is null or empty",
+					HttpStatus.PRECONDITION_FAILED.value());
 		}
-		
-		if(planetRepository.findOneByName(planetName) != null) {
+
+		if (planetRepository.findOneByName(planetName) != null) {
 			logger.error("planetName already registered");
-			throw new ServiceException("PLANET_NAME_ALREADY_REGISTERED", "planetName already registered", HttpStatus.PRECONDITION_FAILED.value());
+			throw new ServiceException("PLANET_NAME_ALREADY_REGISTERED", "planetName already registered",
+					HttpStatus.PRECONDITION_FAILED.value());
 		}
 	}
 
